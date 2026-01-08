@@ -27,7 +27,8 @@ while len(discord_pids) == 0:
     find_discord_process()
     time.sleep(1)
 
-SUPER_KEY = "command" if platform.system() == "Darwin" else "win"
+IS_MAC = platform.system() == "Darwin"
+SUPER_KEY = "command" if IS_MAC else "win"
 CHARACTER_POOL = string.ascii_letters + string.digits + "_" + "."
 TARGET_USERNAME_LENGTH = 3
 
@@ -36,7 +37,7 @@ def handle_name(name: str):
     pag.click(822, 512)
     # shit goes too fast if this is not >= 0.2
     time.sleep(0.2)
-    pag.hotkey(SUPER_KEY, "a")
+    pag.hotkey(SUPER_KEY if IS_MAC else "ctrl", "a")
     pag.press("backspace")
     pag.write(name)
     pag.press("tab", presses=2)
